@@ -13,17 +13,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "push_swap.h"
-//sa
-//sb
-//ss
-//pa
-//pb
-//ra
-//rb
-//rr
-//rra
-//rrb
-//rrr
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {
@@ -202,7 +191,46 @@ void	ft_sort_int_tab(int *tab, int size)
 	}
 }
 
-int main (int argc, char **argv)
+void	normalize(t_stack	*astack)
+{
+	int		i;
+	int		j;
+	int	*sorted;
+	int	*normalized;
+
+	sorted = malloc(sizeof(int) * astack->size);
+	normalized = malloc(sizeof(int) * astack->size);
+	if (!sorted || !normalized)
+	return;
+	i = 0;
+	while (i < astack->size) {
+		sorted[i] = astack->value[i];
+		i++;
+	}
+	ft_sort_int_tab(sorted, astack->size);
+	i = 0;
+	while (i < astack->size) {
+	j = 0;
+		while (j < astack->size) {
+			if (astack->value[i] == sorted[j]) {
+				normalized[i] = j;
+				break;
+			}
+			j++;
+		}
+		i++;
+	}
+
+	i = 0;
+	while (i < astack->size) {
+		astack->value[i] = normalized[i];
+		i++;
+	}
+	free(sorted);
+	free(normalized);
+}
+
+int	main (int argc, char **argv)
 {
 	int		i;
 	int		j;
@@ -216,14 +244,16 @@ int main (int argc, char **argv)
 		while (argv[i])
 		{
 			printf("%s\n", argv[i]);
-			i++;	
+			i++;
 		}
 		printf("argc: %i\n", (argc - 1));
 		astack.size = argc - 1;
 		bstack.size = 0;
 		astack.value = malloc(sizeof(int) * (argc - 1));
 		bstack.value = malloc(sizeof(int) * (argc - 1));
-		i =1;
+		if (!astack.value || !bstack.value)
+			return (0);
+		i = 1;
 		while (argv[i])
 		{
 			astack.value[j] = atoi(argv[i]);
@@ -236,28 +266,18 @@ int main (int argc, char **argv)
 		while (argv[j])
 		{
 			printf("%i\n", astack.value[i]);
-			i++;	
-			j++;	
+			i++;
+			j++;
 		}
-		//ft_sort_int_tab(astack.value, (argc - 1));
-		//i = 0;
-		//j = 1;
-		//printf("tableau en bubblesort\n");
-		//while (argv[j])
-		//{
-		//	printf("%i\n", astack.value[i]);
-		//	i++;	
-		//	j++;	
-		//}
 		i = 0;
 		j = 1;
-		printf("tableau en reverse rotate\n");
-		reverse_rotate_a(&astack, &bstack);
+		printf("tableau normalisé\n");
+		normalize(&astack);
 		while (argv[j])
 		{
 			printf("%i\n", astack.value[i]);
-			i++;	
-			j++;	
+			i++;
+			j++;
 		}
 		free(astack.value);
 		free(bstack.value);
