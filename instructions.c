@@ -6,7 +6,7 @@
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:37:13 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/16 20:52:23 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/16 21:28:22 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,34 @@ int	how_many_bits(int	n)
 	return i;
 }
 
+int	ft_is_sort(int *tab, int length, int (*f)(int, int))
+{
+	int	i;
+
+	if (length <= 0)
+		return (1);
+	i = 0;
+	while (i != (length - 1) && f(tab[i], tab[i + 1]) <= 0)
+	{
+		i++;
+	}
+	if ((i) == length - 1)
+		return (1);
+	i = 0;
+	while (i != (length - 1) && f(tab[i], tab[i + 1]) >= 0)
+	{
+		i++;
+	}
+	if ((i) == length - 1)
+		return (1);
+	return (0);
+}
+
+int	ft_test(int a, int b)
+{
+	return (a - b);
+}
+
 void	radix_sort_base_2(t_stack *astack, t_stack *bstack)
 {
 	int	max;
@@ -258,12 +286,12 @@ void	radix_sort_base_2(t_stack *astack, t_stack *bstack)
 	original_size = astack->size;
 	max = how_many_bits(astack->size - 1);
 	//printf("max bits: %i\n", max);
-	while (i < max)
+	while (i < max && (ft_is_sort(astack->value, astack->size, ft_test) == 0))
 	{
 		j = 0;
 		mask = 1 << i;
 		//printf("bit numero: %d (mask = %d)\n", i, mask);
-		while (j < original_size)
+		while (j < original_size && (ft_is_sort(astack->value, astack->size, ft_test) == 0))
 		{
 			if ((astack->value[0] & mask) == 0)
 			{
@@ -285,6 +313,7 @@ void	radix_sort_base_2(t_stack *astack, t_stack *bstack)
 		i++;
 	}
 }
+
 
 int	main (int argc, char **argv)
 {
