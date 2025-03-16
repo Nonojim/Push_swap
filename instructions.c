@@ -6,7 +6,7 @@
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:37:13 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/14 23:27:17 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/16 20:52:23 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	push_a(t_stack *astack, t_stack *bstack)
 	ft_memmove(&bstack->value[0], &bstack->value[1], (bstack->size - 1) * sizeof(int));
 	astack->size +=1;
 	bstack->size -=1;
+	printf("pa\n");
 	return(0);	
 }
 
@@ -87,6 +88,7 @@ int	push_b(t_stack *astack, t_stack *bstack)
 	ft_memmove(&astack->value[0], &astack->value[1], (astack->size - 1) * sizeof(int));
 	astack->size -=1;
 	bstack->size +=1;
+	printf("pb\n");
 	return(0);	
 }
 
@@ -98,6 +100,7 @@ int	rotate_a(t_stack *astack, t_stack *bstack)
 	tmp = astack->value[0];
 	ft_memmove(&astack->value[0], &astack->value[1], (astack->size - 1) * sizeof(int));
 	astack->value[astack->size - 1] = tmp;
+	printf("ra\n");
 	return (0);
 }
 
@@ -230,6 +233,59 @@ void	normalize(t_stack	*astack)
 	free(normalized);
 }
 
+int	how_many_bits(int	n)
+{
+	int	i;
+
+	i = 0;
+	//printf("max_num: %i\n", n);
+	while (n >> i)
+	{
+		i++;
+	}
+	return i;
+}
+
+void	radix_sort_base_2(t_stack *astack, t_stack *bstack)
+{
+	int	max;
+	int	i;
+	int	j;
+	int	mask;
+	int original_size;
+	
+	i = 0;
+	original_size = astack->size;
+	max = how_many_bits(astack->size - 1);
+	//printf("max bits: %i\n", max);
+	while (i < max)
+	{
+		j = 0;
+		mask = 1 << i;
+		//printf("bit numero: %d (mask = %d)\n", i, mask);
+		while (j < original_size)
+		{
+			if ((astack->value[0] & mask) == 0)
+			{
+				push_b(astack, bstack);
+				//printf("pb : %d -> B\n", bstack->value[0]);
+			}
+			else
+			{
+				rotate_a(astack, bstack);
+				//printf("ra : %d reste dans A\n", astack->value[astack->size - 1]);
+			}
+			j++;
+		}
+		while ((bstack->size) > 0)
+		{
+			push_a(astack, bstack);
+			//printf("pa : %d -> A\n", astack->value[0]);
+		}
+		i++;
+	}
+}
+
 int	main (int argc, char **argv)
 {
 	int		i;
@@ -241,12 +297,7 @@ int	main (int argc, char **argv)
 	j = 0;
 	if (argc >= 3)
 	{
-		while (argv[i])
-		{
-			printf("%s\n", argv[i]);
-			i++;
-		}
-		printf("argc: %i\n", (argc - 1));
+		//printf("argc: %i\n", (argc - 1));
 		astack.size = argc - 1;
 		bstack.size = 0;
 		astack.value = malloc(sizeof(int) * (argc - 1));
@@ -260,7 +311,7 @@ int	main (int argc, char **argv)
 			i++;
 			j++;
 		}
-		i = 0;
+		/*i = 0;
 		j = 1;
 		printf("tableau en int\n");
 		while (argv[j])
@@ -269,13 +320,24 @@ int	main (int argc, char **argv)
 			i++;
 			j++;
 		}
+		*/
+		normalize(&astack);
 		i = 0;
 		j = 1;
-		printf("tableau normalisé\n");
-		normalize(&astack);
+		//printf("tableau normalisé\n");
 		while (argv[j])
 		{
-			printf("%i\n", astack.value[i]);
+			//printf("%i\n", astack.value[i]);
+			i++;
+			j++;
+		}
+		radix_sort_base_2(&astack, &bstack);
+		i = 0;
+		j = 1;
+		//printf("tableau sous radix\n");
+		while (argv[j])
+		{
+			//printf("%i\n", astack.value[i]);
 			i++;
 			j++;
 		}

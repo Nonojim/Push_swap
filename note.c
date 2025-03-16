@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   note.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 22:50:00 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/12 22:50:00 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/16 20:29:21 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -320,18 +320,6 @@ void push(t_stack *stack, int value);
 int pop(t_stack *stack);
 void free_stack(t_stack *stack);
 
-// Fonctions push_swap
-void sa(t_stack *a);
-void sb(t_stack *b);
-void ss(t_stack *a, t_stack *b);
-void pa(t_stack *a, t_stack *b);
-void pb(t_stack *a, t_stack *b);
-void ra(t_stack *a);
-void rb(t_stack *b);
-void rr(t_stack *a, t_stack *b);
-void rra(t_stack *a);
-void rrb(t_stack *b);
-void rrr(t_stack *a, t_stack *b);
 
 #endif
 
