@@ -1,0 +1,81 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   radix.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/17 12:16:54 by npederen          #+#    #+#             */
+/*   Updated: 2025/03/17 12:23:13 by npederen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include "push_swap.h"
+
+int	how_many_bits(int	n)
+{
+	int	i;
+
+	i = 0;
+	//printf("max_num: %i\n", n);
+	while (n >> i)
+	{
+		i++;
+	}
+	return i;
+}
+
+int	ft_is_sort(int *tab, int length)
+{
+	int	i;
+
+	if (length <= 1)
+		return (1);
+	i = 0;
+	while (i < length - 1)
+	{
+		if (tab[i] > tab[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+
+void	radix_sort_base_2(t_stack *astack, t_stack *bstack)
+{
+	int	max;
+	int	i;
+	int	j;
+	int	mask;
+	int original_size;
+	
+	i = 0;
+	original_size = astack->size;
+	max = how_many_bits(astack->size - 1);
+	while (i < max && (ft_is_sort(astack->value, astack->size) == 0))
+	{
+		j = 0;
+		mask = 1 << i;
+		while (j < original_size && (ft_is_sort(astack->value, astack->size) == 0))
+		{
+			if ((astack->value[0] & mask) == 0)
+			{
+				push_b(astack, bstack);
+			}
+			else
+			{
+				rotate_a(astack, bstack);
+			}
+			j++;
+		}
+		while ((bstack->size) > 0)
+		{
+			push_a(astack, bstack);
+		}
+		i++;
+	}
+}
+
