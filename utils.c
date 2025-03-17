@@ -6,13 +6,20 @@
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:24 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/17 12:24:24 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:30:39 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "push_swap.h"
+
+void	ft_putstr_fd(char *s, int fd)
+{
+	while (*s != '\0')
+	{
+		write(fd, s, 1);
+		s++;
+	}
+}
 
 void	*ft_memmove(void *dest, const void *src, size_t n)
 {

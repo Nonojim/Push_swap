@@ -6,12 +6,10 @@
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:16:54 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/17 12:23:13 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:30:34 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "push_swap.h"
 
 int	how_many_bits(int	n)
@@ -19,7 +17,6 @@ int	how_many_bits(int	n)
 	int	i;
 
 	i = 0;
-	//printf("max_num: %i\n", n);
 	while (n >> i)
 	{
 		i++;
@@ -55,7 +52,7 @@ void	radix_sort_base_2(t_stack *astack, t_stack *bstack)
 	i = 0;
 	original_size = astack->size;
 	max = how_many_bits(astack->size - 1);
-	while (i < max && (ft_is_sort(astack->value, astack->size) == 0))
+	while (i < max)
 	{
 		j = 0;
 		mask = 1 << i;

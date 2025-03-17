@@ -6,12 +6,10 @@
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:29:36 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/17 13:57:33 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:30:50 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "push_swap.h"
 
 int	main (int argc, char **argv)
@@ -41,13 +39,6 @@ int	main (int argc, char **argv)
 		radix_sort_base_2(&astack, &bstack);
 		i = 0;
 		j = 1;
-		//printf("tableau sous radix\n");
-		while (argv[j])
-		{
-			//printf("%i\n", astack.value[i]);
-			i++;
-			j++;
-		}
 		free(astack.value);
 		free(bstack.value);
 	}

@@ -6,12 +6,16 @@
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:44:31 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/17 12:24:38 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/17 16:30:46 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_h
 #define PUSH_SWAP_h
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 typedef struct s_stack
 {
@@ -37,5 +41,6 @@ void	*ft_memmove(void *dest, const void *src, size_t n);
 void	ft_swap(int *a, int*b);
 void	ft_sort_int_tab(int *tab, int size);
 void	normalize(t_stack	*astack);
+void	ft_putstr_fd(char *s, int fd);
 
 #endif
