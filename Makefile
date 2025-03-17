@@ -1,5 +1,5 @@
 #sources files
-SRC = utils.c radix.c push_swap.c instructions.c instructions_unused.c instructions_unused_2.c
+SRC = utils.c radix.c push_swap.c instructions.c instructions_2.c instructions_3.c little_sort.c
 #append .o to each .c files in the SRC
 #OBJS := $(SRC:%.c=%.o)
 OBJS = ${SRC:.c=.o}
@@ -25,7 +25,7 @@ $(NAME): $(OBJS)
 # "%" is a wildcard for "name of the files without extension"
 # $@ = target, here target = .o "$<" = first dependencies here = .c
 %.o: %.c
-	$(CC) $(CPPFLAGS) $(CCFLAGS) -o $@ -c $<
+	$(CC) -g $(CPPFLAGS) $(CCFLAGS) -o $@ -c $<
 #clean delete all .o files
 clean:
 	$(RM) $(OBJS)

@@ -6,18 +6,28 @@
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:29:36 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/17 16:30:50 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/17 20:29:14 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main (int argc, char **argv)
+void	ft_sort_picker(t_stack *astack, t_stack *bstack)
+{
+	if (astack->size == 3)
+		sort_3(astack, bstack);
+	else if (astack->size > 3 && astack->size < 6)
+		sort_4_5(astack, bstack);
+	else
+		radix_sort_base_2(astack, bstack);
+}
+
+int	main(int argc, char **argv)
 {
 	int		i;
 	int		j;
-	t_stack astack;
-	t_stack bstack;
+	t_stack	astack;
+	t_stack	bstack;
 
 	i = 1;
 	j = 0;
@@ -30,15 +40,9 @@ int	main (int argc, char **argv)
 		if (!astack.value || !bstack.value)
 			return (0);
 		while (argv[i])
-		{
-			astack.value[j] = atoi(argv[i]);
-			i++;
-			j++;
-		}
+			astack.value[j++] = atoi(argv[i++]);
 		normalize(&astack);
-		radix_sort_base_2(&astack, &bstack);
-		i = 0;
-		j = 1;
+		ft_sort_picker(&astack, &bstack);
 		free(astack.value);
 		free(bstack.value);
 	}

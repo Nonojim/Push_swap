@@ -6,7 +6,7 @@
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:12:24 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/17 16:30:39 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/17 21:27:40 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,32 +19,6 @@ void	ft_putstr_fd(char *s, int fd)
 		write(fd, s, 1);
 		s++;
 	}
-}
-
-void	*ft_memmove(void *dest, const void *src, size_t n)
-{
-	size_t			i;
-
-	i = 0;
-	if (!dest && !src)
-		return (NULL);
-	if ((size_t)dest >= (size_t)src)
-	{
-		while (n > 0)
-		{
-			(((char *)dest)[n - 1] = ((char *)src)[n - 1]);
-			n--;
-		}
-	}
-	else
-	{
-		while (i < n)
-		{
-			((char *)dest)[i] = ((char *)src)[i];
-			i++;
-		}
-	}
-	return (dest);
 }
 
 void	ft_swap(int *a, int*b)
@@ -75,42 +49,52 @@ void	ft_sort_int_tab(int *tab, int size)
 	}
 }
 
-void	normalize(t_stack	*astack)
+void	normalize_values(t_stack *astack, int *sorted, int *normalized)
 {
-	int		i;
-	int		j;
-	int	*sorted;
-	int	*normalized;
+	int	i;
+	int	j;
 
-	sorted = malloc(sizeof(int) * astack->size);
-	normalized = malloc(sizeof(int) * astack->size);
-	if (!sorted || !normalized)
-	return;
 	i = 0;
-	while (i < astack->size) {
-		sorted[i] = astack->value[i];
-		i++;
-	}
-	ft_sort_int_tab(sorted, astack->size);
-	i = 0;
-	while (i < astack->size) {
-	j = 0;
-		while (j < astack->size) {
-			if (astack->value[i] == sorted[j]) {
+	while (i < astack->size)
+	{
+		j = 0;
+		while (j < astack->size)
+		{
+			if (astack->value[i] == sorted[j])
+			{
 				normalized[i] = j;
-				break;
+				break ;
 			}
 			j++;
 		}
 		i++;
 	}
+}
 
+void	normalize(t_stack	*astack)
+{
+	int		i;
+	int		*sorted;
+	int		*normalized;
+
+	sorted = malloc(sizeof(int) * astack->size);
+	normalized = malloc(sizeof(int) * astack->size);
+	if (!sorted || !normalized)
+		return ;
 	i = 0;
-	while (i < astack->size) {
+	while (i < astack->size)
+	{
+		sorted[i] = astack->value[i];
+		i++;
+	}
+	ft_sort_int_tab(sorted, astack->size);
+	normalize_values(astack, sorted, normalized);
+	i = 0;
+	while (i < astack->size)
+	{
 		astack->value[i] = normalized[i];
 		i++;
 	}
 	free(sorted);
 	free(normalized);
 }
-

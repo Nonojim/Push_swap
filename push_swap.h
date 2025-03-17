@@ -6,16 +6,16 @@
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:44:31 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/17 16:30:46 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/17 21:07:49 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_h
-#define PUSH_SWAP_h
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
 typedef struct s_stack
 {
@@ -34,13 +34,16 @@ int		rrr(t_stack *astack, t_stack *bstack);
 int		swap_a(t_stack *astack, t_stack *bstack);
 int		swap_b(t_stack *astack, t_stack *bstack);
 int		ss(t_stack *astack, t_stack *bstack);
-int		how_many_bits(int	n);
+int		how_many_bits(int n);
 int		ft_is_sort(int *tab, int length);
 void	radix_sort_base_2(t_stack *astack, t_stack *bstack);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	ft_swap(int *a, int*b);
 void	ft_sort_int_tab(int *tab, int size);
 void	normalize(t_stack	*astack);
+void	sort_3(t_stack *astack, t_stack *bstack);
+void	sort_4_5(t_stack *astack, t_stack *bstack);
 void	ft_putstr_fd(char *s, int fd);
+void	normalize_values(t_stack *astack, int *sorted, int *normalized);
 
 #endif

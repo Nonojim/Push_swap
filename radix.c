@@ -6,13 +6,13 @@
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:16:54 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/17 16:30:34 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/17 21:31:29 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	how_many_bits(int	n)
+int	how_many_bits(int n)
 {
 	int	i;
 
@@ -21,7 +21,7 @@ int	how_many_bits(int	n)
 	{
 		i++;
 	}
-	return i;
+	return (i);
 }
 
 int	ft_is_sort(int *tab, int length)
@@ -40,39 +40,31 @@ int	ft_is_sort(int *tab, int length)
 	return (1);
 }
 
-
 void	radix_sort_base_2(t_stack *astack, t_stack *bstack)
 {
 	int	max;
 	int	i;
 	int	j;
 	int	mask;
-	int original_size;
-	
+	int	size;
+
 	i = 0;
-	original_size = astack->size;
+	size = astack->size;
 	max = how_many_bits(astack->size - 1);
 	while (i < max)
 	{
 		j = 0;
 		mask = 1 << i;
-		while (j < original_size && (ft_is_sort(astack->value, astack->size) == 0))
+		while (j < size && (ft_is_sort(astack->value, astack->size) == 0))
 		{
 			if ((astack->value[0] & mask) == 0)
-			{
 				push_b(astack, bstack);
-			}
 			else
-			{
 				rotate_a(astack, bstack);
-			}
 			j++;
 		}
 		while ((bstack->size) > 0)
-		{
 			push_a(astack, bstack);
-		}
 		i++;
 	}
 }
-
