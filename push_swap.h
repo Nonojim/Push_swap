@@ -35,7 +35,7 @@ int		swap_a(t_stack *astack, t_stack *bstack);
 int		swap_b(t_stack *astack, t_stack *bstack);
 int		ss(t_stack *astack, t_stack *bstack);
 int		how_many_bits(int n);
-int		ft_is_sort(int *tab, int length);
+int		ft_is_sort(t_stack *astack);
 void	radix_sort_base_2(t_stack *astack, t_stack *bstack);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	ft_swap(int *a, int*b);
@@ -44,8 +44,9 @@ void	normalize(t_stack	*astack);
 void	sort_3(t_stack *astack, t_stack *bstack);
 void	sort_4_5(t_stack *astack, t_stack *bstack);
 void	ft_putstr_fd(char *s, int fd);
-int		ft_atoi(char *nptr);
-int		ft_isdigit(int c);
+void	free_stacks(t_stack *astack, t_stack *bstack, char option);
+void	check_doubles(t_stack *astack, t_stack *bstack);
+long	ft_atoi(char *nptr, t_stack *astack, t_stack *bstack);
 void	normalize_values(t_stack *astack, int *sorted, int *normalized);
 
 #endif

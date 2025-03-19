@@ -27,6 +27,8 @@ void	sort_3(t_stack *astack, t_stack *bstack)
 
 void	sort_4_5(t_stack *astack, t_stack *bstack)
 {
+	if (ft_is_sort(astack) == 1)
+		free_stacks(astack, bstack, 'i');
 	while (bstack->size <= 1)
 	{
 		if (astack->value[0] == 0 || astack->value[0] == 1)

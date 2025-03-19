@@ -24,16 +24,16 @@ int	how_many_bits(int n)
 	return (i);
 }
 
-int	ft_is_sort(int *tab, int length)
+int	ft_is_sort(t_stack *astack)
 {
 	int	i;
 
-	if (length <= 1)
+	if (astack->size <= 1)
 		return (1);
 	i = 0;
-	while (i < length - 1)
+	while (i < astack->size - 1)
 	{
-		if (tab[i] > tab[i + 1])
+		if (astack->value[i] > astack->value[i + 1])
 			return (0);
 		i++;
 	}
@@ -55,7 +55,7 @@ void	radix_sort_base_2(t_stack *astack, t_stack *bstack)
 	{
 		j = 0;
 		mask = 1 << i;
-		while (j < size && (ft_is_sort(astack->value, astack->size) == 0))
+		while (j < size && (ft_is_sort(astack) == 0))
 		{
 			if ((astack->value[0] & mask) == 0)
 				push_b(astack, bstack);

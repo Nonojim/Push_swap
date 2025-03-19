@@ -12,35 +12,43 @@
 
 #include "push_swap.h"
 
-int	ft_atoi(char *nptr)
+void	free_stacks(t_stack *astack, t_stack *bstack, char option)
 {
-	size_t	i;
-	int		sign;
-	int		result;
-
-	i = 0;
-	sign = 1;
-	result = 0;
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
-		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
+	free(astack->value);
+	free(bstack->value);
+	if (option == 'i')
+		exit(1);
+	if (option == 'e')
 	{
-		if (nptr[i] == '-')
-			sign *= -1;
-		i++;
+		ft_putstr_fd("Error\n", 1);
+		exit(1);
 	}
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-	{
-		result = result * 10 + (nptr[i] - '0');
-		i++;
-	}
-	return (result * sign);
 }
-/*int	ft_atoi(char *nptr)
+
+void	check_doubles(t_stack *astack, t_stack *bstack)
 {
-	size_t	i;
-	int		sign;
-	int		result;
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < (astack->size - 1))
+	{
+		j = i + 1;
+		while (j < astack->size)
+		{
+			if (astack->value[i] == astack->value[j])
+				free_stacks(astack, bstack, 'e');
+			j++;
+		}
+		i++;
+	}
+}
+
+long	ft_atoi(char *nptr, t_stack *astack, t_stack *bstack)
+{
+	long		i;
+	long		sign;
+	long		result;
 
 	i = 0;
 	sign = 1;
@@ -56,12 +64,7 @@ int	ft_atoi(char *nptr)
 		result = result * 10 + (nptr[i] - '0');
 		i++;
 	}
+	if (result * sign < -2147483648 || result * sign > 2147483647 || nptr[i])
+		free_stacks(astack, bstack, 'e');
 	return (result * sign);
-}*/
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	return (0);
 }

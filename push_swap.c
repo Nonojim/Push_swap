@@ -31,7 +31,7 @@ int	main(int argc, char **argv)
 
 	i = 1;
 	j = 0;
-	if (argc >= 3)
+	if (argc > 1)
 	{
 		astack.size = argc - 1;
 		bstack.size = 0;
@@ -40,11 +40,11 @@ int	main(int argc, char **argv)
 		if (!astack.value || !bstack.value)
 			return (0);
 		while (argv[i])
-			astack.value[j++] = ft_atoi(argv[i++]);
+			astack.value[j++] = ft_atoi(argv[i++], &astack, &bstack);
+		check_doubles(&astack, &bstack);
 		normalize(&astack);
 		ft_sort_picker(&astack, &bstack);
-		free(astack.value);
-		free(bstack.value);
+		free_stacks(&astack, &bstack, 'f');
 	}
 	return (0);
 }
