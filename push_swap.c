@@ -6,7 +6,7 @@
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/17 12:29:36 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/17 20:29:14 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/18 19:28:32 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(int argc, char **argv)
 		if (!astack.value || !bstack.value)
 			return (0);
 		while (argv[i])
-			astack.value[j++] = atoi(argv[i++]);
+			astack.value[j++] = ft_atoi(argv[i++]);
 		normalize(&astack);
 		ft_sort_picker(&astack, &bstack);
 		free(astack.value);

@@ -1,5 +1,5 @@
 #sources files
-SRC = utils.c radix.c push_swap.c instructions.c instructions_2.c instructions_3.c little_sort.c
+SRC = utils.c utils_2.c radix.c push_swap.c instructions.c instructions_2.c instructions_3.c little_sort.c
 #append .o to each .c files in the SRC
 #OBJS := $(SRC:%.c=%.o)
 OBJS = ${SRC:.c=.o}

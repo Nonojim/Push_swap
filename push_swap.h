@@ -6,7 +6,7 @@
 /*   By: npederen <npederen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/14 16:44:31 by npederen          #+#    #+#             */
-/*   Updated: 2025/03/17 21:07:49 by npederen         ###   ########.fr       */
+/*   Updated: 2025/03/18 19:03:07 by npederen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	normalize(t_stack	*astack);
 void	sort_3(t_stack *astack, t_stack *bstack);
 void	sort_4_5(t_stack *astack, t_stack *bstack);
 void	ft_putstr_fd(char *s, int fd);
+int		ft_atoi(char *nptr);
+int		ft_isdigit(int c);
 void	normalize_values(t_stack *astack, int *sorted, int *normalized);
 
 #endif
