@@ -20,7 +20,7 @@ void	free_stacks(t_stack *astack, t_stack *bstack, char option)
 		exit(1);
 	if (option == 'e')
 	{
-		ft_putstr_fd("Error\n", 1);
+		ft_putstr_fd("Error\n", 2);
 		exit(1);
 	}
 }
